@@ -1,45 +1,4 @@
 #!/usr/bin/env python3
-"""
-ingest_caramella.py
-
-Build a fresh local Chroma vector database from the preprocessed paragraph corpus.
-
-Targets:
-  - Input: JSONL file with lines shaped {"id":..., "text":..., "metadata":{...}}
-  - Output: Persistent Chroma DB at --db-path (default ./caramella_vector_db)
-  - Collection name: --collection (default caramella_paragraphs)
-
-Features:
-  - Batched embeddings (configurable --batch-size)
-  - Resume support via processed_ids log (skip already ingested ids)
-  - Periodic progress + persistence (--persist-interval)
-  - Graceful retry on transient embedding/DB errors
-  - Lightweight (no LangChain dependency)
-
-Usage Examples:
-  Dry run first 5k paragraphs:
-    python ingest_caramella.py --limit 5000
-
-  Full ingestion in background while chatbot runs:
-    nohup python ingest_caramella.py > ingest_caramella.log 2>&1 &
-
-  Resume after interruption:
-    python ingest_caramella.py --resume
-
-Query test while ingest running (same process or separate):
-    python - <<'EOF'
-    import chromadb
-    client = chromadb.PersistentClient(path='./caramella_vector_db')
-    col = client.get_collection('caramella_paragraphs')
-    q = 'query: 브런치 콘서트 단체 예매 방법'
-    res = col.query(query_texts=[q], n_results=3)
-    for t,m in zip(res['documents'][0], res['metadatas'][0]):
-        print('\n---\n', t[:400])
-        print('meta:', m)
-    EOF
-
-Note: Paragraph texts already include the E5 prefix 'passage:' from preprocessing.
-"""
 
 import os
 import sys

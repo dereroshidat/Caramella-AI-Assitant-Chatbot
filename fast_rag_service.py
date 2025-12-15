@@ -1,11 +1,5 @@
 #!/usr/bin/env python3
-"""
-Fast RAG Service: Production API with an approximate 1 to 3 second latency target.
 
-Usage:
-    python fast_rag_service.py --profile balanced
-    python fast_rag_service.py --port 8080 --workers 1
-"""
 
 import os
 import sys
@@ -24,9 +18,9 @@ from fast_rag_pipeline import FastRAGPipeline
 from fast_rag_config import FastRAGConfig, DeploymentProfiles
 
 
-# ============================================================================ #
-# API Models                                                                   #
-# ============================================================================ #
+
+# API Models                                                                   
+
 
 class QueryRequest(BaseModel):
     """Query request model."""
@@ -81,9 +75,9 @@ class StatsResponse(BaseModel):
     config: Dict
 
 
-# ============================================================================ #
-# FastAPI Application                                                          #
-# ============================================================================ #
+
+# FastAPI Application                                                          
+
 
 app = FastAPI(
     title="Fast RAG Service",
@@ -107,9 +101,9 @@ pipeline: Optional[FastRAGPipeline] = None
 start_time = time.time()
 
 
-# ============================================================================ #
-# Startup and Shutdown                                                         #
-# ============================================================================ #
+
+# Startup and Shutdown                                                         
+
 
 @app.on_event("startup")
 async def startup_event():
@@ -136,9 +130,9 @@ async def shutdown_event():
     print("\nShutting down Fast RAG Service")
 
 
-# ============================================================================ #
-# Endpoints                                                                    #
-# ============================================================================ #
+
+# Endpoints                                                                    
+
 
 @app.get("/", response_model=Dict)
 async def root():
@@ -265,9 +259,9 @@ async def add_process_time_header(request: Request, call_next):
     return response
 
 
-# ============================================================================ #
-# CLI                                                                          #
-# ============================================================================ #
+
+# CLI                                                                          
+
 
 def main():
     """Run the Fast RAG service."""

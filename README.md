@@ -72,6 +72,9 @@ npm run dev
   ├─ frontend/                 # React + Vite frontend
   ├─ scripts/                  # Helper scripts (build DB, run API/UI)
   ├─ SAMPLE_DATA/              # Tiny KO/EN sample corpus
+  ├─ assets/
+  │  ├─ System Architecture.png/
+  │  ├─ RAG Architecture.JPG/   
   ├─ models/                   # (place GGUF here, not versioned)
   ├─ fast_rag_config.py        # Runtime config
   ├─ fast_rag_pipeline.py      # RAG pipeline logic
